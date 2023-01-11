@@ -1,6 +1,7 @@
 #include "Display.h"
 #include <SFML/Graphics.hpp>
 
+//TODO: Stop thread execution on demand, colors in rendering, slow down faster implementation for presentation
 int main()
 {
     time(NULL); // For better random generation

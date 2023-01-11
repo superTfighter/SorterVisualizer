@@ -28,7 +28,7 @@ void Display::handleWindowEvents(sf::Event event)
         if (event.key.code == sf::Keyboard::S)
             this->logic.setSorterImp(); // Quick and dirty hack to set debug imp
         else if (event.key.code == sf::Keyboard::R)
-            this->logic.generateRandomData();
+            this->logic.reset();
         break;
 
     default:

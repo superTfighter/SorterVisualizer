@@ -29,8 +29,8 @@ sf::Image SorterLogic::generateImage()
                 // rgba(255,255,255,255)
                 sf::Color color(
                     scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
-                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
-                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    255 - scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    0 * scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
                     255);
 
                 image.setPixel(x, y, color);
@@ -56,8 +56,8 @@ sf::Image SorterLogic::generateImage()
                 // rgba(255,255,255,255)
                 sf::Color color(
                     scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
-                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
-                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    255 - scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    0 * scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
                     255);
 
                 image.setPixel(x, y, color);
@@ -73,7 +73,7 @@ void SorterLogic::setSorterImp()
     this->sorter_imp = &heap_s;
 
     this->sorter_imp->setArray(this->original_data);
-    std::thread(&Sorter::sort,this->sorter_imp).detach();
+    std::thread(&Sorter::sort, this->sorter_imp).detach();
 }
 
 void SorterLogic::generateRandomData()

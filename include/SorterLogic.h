@@ -45,6 +45,8 @@ private:
 
     SelectionSort selection_s;
     BubbleSort bubble_s;
+    InsertionSort insertion_s;
     QuickSort quick_s;
     HeapSort heap_s;
+    
 };
