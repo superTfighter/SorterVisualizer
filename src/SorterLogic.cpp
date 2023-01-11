@@ -1,6 +1,6 @@
 #include "SorterLogic.h"
 
-//TODO:FIX!!!
+// TODO:FIX!!!
 sf::Image SorterLogic::generateImage()
 {
     sf::Image image;
@@ -41,15 +41,28 @@ sf::Image SorterLogic::generateImage()
     return image;
 }
 
-void SorterLogic::generateRandomData(int maxValue, std::vector<int> &vector)
+void SorterLogic::setSorterImp()
 {
-    for (size_t i = 0; i < vector.size(); i++)
-    {
-        vector[i] = rand() % maxValue;
-    }
+    this->sorter_imp = &selection_s;
+}
+
+void SorterLogic::generateRandomData()
+{
+    std::thread(&SorterLogic::generateRandomDataThreadTask, this).detach();
 }
 
 int SorterLogic::scaleRange(int value, int range_min, int range_max, int value_min, int value_max)
 {
     return (((range_max - range_min) * (value - value_min)) / (value_max - value_min)) + range_min;
+}
+
+void SorterLogic::generateRandomDataThreadTask()
+{
+
+    for (size_t i = 0; i < original_data.size(); i++)
+    {
+        original_data[i] = rand() % MAX_VALUE;
+    }
+
+    int a = 0;
 }

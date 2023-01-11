@@ -10,8 +10,8 @@ void Display::renderLoop()
     }
 
     this->runLogic();
-
     this->draw();
+
 
     return;
 }
@@ -19,9 +19,21 @@ void Display::renderLoop()
 void Display::handleWindowEvents(sf::Event event)
 {
 
-    if (event.type == sf::Event::Closed)
+    switch (event.type)
     {
+    case sf::Event::Closed:
         this->window->close();
+        break;
+
+    case sf::Event::KeyPressed:
+        if (event.key.code == sf::Keyboard::S)
+            this->logic.setSorterImp(); // Quick and dirty hack to set debug imp
+        else if(event.key.code == sf::Keyboard::R)
+            this->logic.generateRandomData();
+        break;
+
+    default:
+        break;
     }
 
     return;
@@ -32,7 +44,6 @@ void Display::draw()
 {
     window->draw(numbers_sprite);
     window->draw(sorter_name_text);
-   
 }
 
 void Display::runLogic()
@@ -43,7 +54,7 @@ void Display::runLogic()
     if (this->logic.sorter_imp == nullptr)
         sorter_name_text.setString("Generate random numbers then choose a sorting method!");
     else
-        sorter_name_text.setString("ASD");
+        sorter_name_text.setString(this->logic.sorter_imp->to_string());
 
     sf::Image numbers_image = this->logic.generateImage();
 
