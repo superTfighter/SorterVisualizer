@@ -1,33 +1,29 @@
 #include "SorterLogic.h"
 
-// TODO:FIX!!!
 sf::Image SorterLogic::generateImage()
 {
     sf::Image image;
 
     if (this->sorter_imp == nullptr)
     {
-
-        int chunksize = original_data.size() / 144;
-
-        image.create(chunksize * 16, chunksize * 9, sf::Color::Black);
+        image.create(1280, 720, sf::Color::Black);
 
         int iterator = 0;
 
-        for (size_t y = 0; y < chunksize * 9; y++)
+        for (size_t y = 0; y < image.getSize().y; y++)
         {
-            for (size_t x = 0; x < chunksize * 16; x++)
+            for (size_t x = 0; x < image.getSize().x; x++)
             {
-                iterator = (y * 16 + x);
-
-                // TODO:FIX, Quick and dirty bug fix!
-                if (iterator > SAMPLE_SIZE)
-                    iterator = SAMPLE_SIZE - 1;
+                iterator = (y * (image.getSize().x - 1) + x);
 
                 int value = original_data[iterator];
 
-                // rgb(255,105,180)
-                sf::Color color(scaleRange(value, 0, 255, 0, MAX_VALUE - 1), scaleRange(value, 0, 105, 0, MAX_VALUE - 1), scaleRange(value, 0, 180, 0, MAX_VALUE - 1), 255);
+                // rgba(255,255,255,255)
+                sf::Color color(
+                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    255);
 
                 image.setPixel(x, y, color);
             }
@@ -35,7 +31,28 @@ sf::Image SorterLogic::generateImage()
     }
     else
     {
-        image.create(16, 9, sf::Color::Blue);
+        image.create(1280, 720, sf::Color::Black);
+
+        int iterator = 0;
+
+        for (size_t y = 0; y < image.getSize().y; y++)
+        {
+            for (size_t x = 0; x < image.getSize().x; x++)
+            {
+                iterator = (y * (image.getSize().x - 1) + x);
+
+                int value = sorter_imp->getArray()[iterator];
+
+                // rgba(255,255,255,255)
+                sf::Color color(
+                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    scaleRange(value, 0, 255, 0, MAX_VALUE - 1),
+                    255);
+
+                image.setPixel(x, y, color);
+            }
+        }
     }
 
     return image;
@@ -44,6 +61,8 @@ sf::Image SorterLogic::generateImage()
 void SorterLogic::setSorterImp()
 {
     this->sorter_imp = &selection_s;
+
+    
 }
 
 void SorterLogic::generateRandomData()
@@ -59,9 +78,13 @@ int SorterLogic::scaleRange(int value, int range_min, int range_max, int value_m
 void SorterLogic::generateRandomDataThreadTask()
 {
 
+    std::random_device rand_dev;
+    std::mt19937 generator(rand_dev());
+    std::uniform_int_distribution<int> distr(0, MAX_VALUE);
+
     for (size_t i = 0; i < original_data.size(); i++)
     {
-        original_data[i] = rand() % MAX_VALUE;
+        original_data[i] = distr(generator);
     }
 
     int a = 0;

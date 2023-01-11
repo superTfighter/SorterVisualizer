@@ -9,8 +9,10 @@
 #include <thread>
 #include <vector>
 #include <iostream>
+#include "math.h"
+#include <random>
 
-#define SAMPLE_SIZE 20000
+#define SAMPLE_SIZE 920880 // TODO DINAMIC, this currently equals to a 1280x720 sample size
 #define MAX_VALUE 50000
 
 class SorterLogic

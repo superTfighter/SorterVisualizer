@@ -60,6 +60,9 @@ void Display::runLogic()
 
     this->numbers_texture.loadFromImage(numbers_image);
     sprite.setTexture(this->numbers_texture);
-    sprite.scale(window->getView().getSize().x / sprite.getLocalBounds().width, window->getView().getSize().y / sprite.getLocalBounds().height);
+    sprite.scale((float)window->getView().getSize().x /(float)numbers_image.getSize().x, (float)window->getView().getSize().y /(float)numbers_image.getSize().y);
+
+    sprite.setPosition(0,0);
+    
     this->numbers_sprite = sprite;
 }

@@ -5,8 +5,10 @@ int main()
 {
     time(NULL); // For better random generation
 
-    sf::RenderWindow window(sf::VideoMode(960, 540), "Sorter Visualizer!");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Sorter Visualizer!");
     Display display(&window);
+
+    window.setFramerateLimit(60);
 
     while (window.isOpen())
     {
