@@ -1,9 +1,7 @@
 #include "InsertionSort.h"
 
-std::vector<int> InsertionSort::sort_imp(std::vector<int> input)
+std::vector<int> InsertionSort::sort_imp()
 {
-    this->_arr = input;
-
     int key, j;
 
     for (size_t i = 0; i < this->_arr.size(); i++)

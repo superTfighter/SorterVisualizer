@@ -12,7 +12,6 @@ void Display::renderLoop()
     this->runLogic();
     this->draw();
 
-
     return;
 }
 
@@ -28,7 +27,7 @@ void Display::handleWindowEvents(sf::Event event)
     case sf::Event::KeyPressed:
         if (event.key.code == sf::Keyboard::S)
             this->logic.setSorterImp(); // Quick and dirty hack to set debug imp
-        else if(event.key.code == sf::Keyboard::R)
+        else if (event.key.code == sf::Keyboard::R)
             this->logic.generateRandomData();
         break;
 
@@ -52,17 +51,24 @@ void Display::runLogic()
     sf::Sprite sprite;
 
     if (this->logic.sorter_imp == nullptr)
-        sorter_name_text.setString("Generate random numbers then choose a sorting method!");
+    {
+        this->sorter_name_text.setString("Generate random numbers then choose a sorting method!");
+    }
     else
-        sorter_name_text.setString(this->logic.sorter_imp->to_string());
+    {
+        this->sorter_name_text.setString(this->logic.sorter_imp->to_string());
+
+        if (!this->logic.isRunning())
+            this->logic.reset();
+    }
 
     sf::Image numbers_image = this->logic.generateImage();
 
     this->numbers_texture.loadFromImage(numbers_image);
     sprite.setTexture(this->numbers_texture);
-    sprite.scale((float)window->getView().getSize().x /(float)numbers_image.getSize().x, (float)window->getView().getSize().y /(float)numbers_image.getSize().y);
+    sprite.scale((float)window->getView().getSize().x / (float)numbers_image.getSize().x, (float)window->getView().getSize().y / (float)numbers_image.getSize().y);
 
-    sprite.setPosition(0,0);
-    
+    sprite.setPosition(0, 0);
+
     this->numbers_sprite = sprite;
 }

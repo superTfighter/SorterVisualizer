@@ -1,9 +1,7 @@
 #include "HeapSort.h"
 
-std::vector<int> HeapSort::sort_imp(std::vector<int> input)
+std::vector<int> HeapSort::sort_imp()
 {
-    this->_arr = input;
-
     this->heapSort(this->_arr.size());
 
     return this->_arr;

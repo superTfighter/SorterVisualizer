@@ -1,9 +1,7 @@
 #include "QuickSort.h"
 
-std::vector<int> QuickSort::sort_imp(std::vector<int> input)
+std::vector<int> QuickSort::sort_imp()
 {
-    this->_arr = input;
-
     this->qSort(0, this->_arr.size() - 1);
 
     return this->_arr;

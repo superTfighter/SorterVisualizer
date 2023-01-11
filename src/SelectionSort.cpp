@@ -1,9 +1,7 @@
 #include "SelectionSort.h"
 
-std::vector<int> SelectionSort::sort_imp(std::vector<int> input)
+std::vector<int> SelectionSort::sort_imp()
 {
-    this->_arr = input;
-
     int min_idx;
 
     for (size_t i = 0; i < this->_arr.size() - 1; i++)

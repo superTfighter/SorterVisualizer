@@ -8,7 +8,7 @@ public:
     std::string to_string();
 
 private:
-    std::vector<int> sort_imp(std::vector<int> input);
+    std::vector<int> sort_imp();
 
     void heapSort(int N);
     void heapify(int N, int i);

@@ -1,8 +1,12 @@
 #include "ISorter.h"
 
-std::vector<int> Sorter::sort(std::vector<int> input)
+std::vector<int> Sorter::sort()
 {
-    std::vector<int> solution = this->sort_imp(input);
+    this->isRunning = true;
+
+    std::vector<int> solution = this->sort_imp();
+
+    this->isRunning = false;
 
     return solution;
 }

@@ -1,5 +1,13 @@
 #include "SorterLogic.h"
 
+bool SorterLogic::isRunning()
+{
+    if (this->sorter_imp != nullptr)
+        return this->sorter_imp->isRunning;
+
+    return false;
+}
+
 sf::Image SorterLogic::generateImage()
 {
     sf::Image image;
@@ -33,6 +41,8 @@ sf::Image SorterLogic::generateImage()
     {
         image.create(1280, 720, sf::Color::Black);
 
+        std::vector<int> array = sorter_imp->getArray();
+
         int iterator = 0;
 
         for (size_t y = 0; y < image.getSize().y; y++)
@@ -41,7 +51,7 @@ sf::Image SorterLogic::generateImage()
             {
                 iterator = (y * (image.getSize().x - 1) + x);
 
-                int value = sorter_imp->getArray()[iterator];
+                int value = array[iterator];
 
                 // rgba(255,255,255,255)
                 sf::Color color(
@@ -60,14 +70,21 @@ sf::Image SorterLogic::generateImage()
 
 void SorterLogic::setSorterImp()
 {
-    this->sorter_imp = &selection_s;
+    this->sorter_imp = &heap_s;
 
-    
+    this->sorter_imp->setArray(this->original_data);
+    std::thread(&Sorter::sort,this->sorter_imp).detach();
 }
 
 void SorterLogic::generateRandomData()
 {
     std::thread(&SorterLogic::generateRandomDataThreadTask, this).detach();
+}
+
+void SorterLogic::reset()
+{
+    this->sorter_imp = nullptr;
+    this->generateRandomData();
 }
 
 int SorterLogic::scaleRange(int value, int range_min, int range_max, int value_min, int value_max)

@@ -28,13 +28,13 @@ public:
     }
 
     Sorter *sorter_imp;
+    
+    bool isRunning();  
 
-    /*  std::vector<int> getOriginalData();
-     bool isRunning();
-  */
     sf::Image generateImage();
     void setSorterImp();
     void generateRandomData();
+    void reset();
 
 private:
     std::vector<int> original_data;
@@ -45,4 +45,6 @@ private:
 
     SelectionSort selection_s;
     BubbleSort bubble_s;
+    QuickSort quick_s;
+    HeapSort heap_s;
 };

@@ -1,9 +1,7 @@
 #include "BubbleSort.h"
 
-std::vector<int> BubbleSort::sort_imp(std::vector<int> input)
+std::vector<int> BubbleSort::sort_imp()
 {
-    this->_arr = input;
-
     for (size_t i = 0; i < this->_arr.size() - 1; i++)
     {
         for (size_t j = 0; j < this->_arr.size() - i - 1; j++)
