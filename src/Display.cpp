@@ -45,14 +45,10 @@ void Display::runLogic()
     else
         sorter_name_text.setString("ASD");
 
-
-
     sf::Image numbers_image = this->logic.generateImage();
 
     this->numbers_texture.loadFromImage(numbers_image);
-
     sprite.setTexture(this->numbers_texture);
     sprite.scale(window->getView().getSize().x / sprite.getLocalBounds().width, window->getView().getSize().y / sprite.getLocalBounds().height);
-
     this->numbers_sprite = sprite;
 }
